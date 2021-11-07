@@ -1,35 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../models");
+const userController = require("../controllers/users.controller");
+const passport = require("passport");
 
-router.get("/all", (req, res) => {
-  db.Users.findAll().then((users) => res.send(users));
-});
+router.get("/all", userController.getAllUser);
 
-router.get("/find/:id", (req, res) => {
-  db.Users.findAll({
-    where: {
-      id: req.params.id,
-    },
-  }).then((users) => res.send(users));
-});
+router.get("/find/:id", userController.getUserById);
 
-router.post("/new", (req, res) => {
-  db.Users.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-  }).then((submitedUser) => res.send(submitedUser));
-});
+router.post("/new", userController.addNew);
 
-router.delete("/delete/:id", (req, res) => {
-  db.Users.destroy({
-    where: {
-      id: req.params.id,
-    },
-  }).then(() => res.send("success"));
-});
+router.post("/authenticate", userController.authenticate);
+
+router.delete(
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  userController.deleteUser
+);
 
 module.exports = router;

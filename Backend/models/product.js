@@ -25,13 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     Product.belongsTo(models.ProductCategory, {
       foreignKey: {
         allowNull: false,
-        defaultValue: 4,
       },
     });
-  };
-
-  Product.associate = (models) => {
-    Product.hasMany(models.OrderDetail);
   };
 
   return Product;
