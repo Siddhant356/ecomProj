@@ -2,15 +2,23 @@ module.exports = (sequelize, DataTypes) => {
   const OrderDetail = sequelize.define("OrderDetail", {
     quantity: {
       type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   });
 
   OrderDetail.associate = (models) => {
     OrderDetail.belongsTo(models.Order, {
       foreignKey: {
-        allowNull: false,
-      },
+        allowNull: false
+      }
+    });
+  };
+
+  OrderDetail.associate = (models) => {
+    OrderDetail.belongsTo(models.Product, {
+      foreignKey: {
+        allowNull: false
+      }
     });
   };
 
