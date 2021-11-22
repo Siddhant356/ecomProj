@@ -2,24 +2,32 @@ module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define("Users", {
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
-    username: {
+    gender: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   });
   Users.associate = (models) => {
     Users.hasMany(models.Order);

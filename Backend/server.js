@@ -19,10 +19,41 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(expressLayouts);
-app.set("layout", "./layouts/home");
+app.set("layout", "index");
 app.set("view engine", "ejs");
+
 app.get("", (req, res) => {
   res.render("index");
+});
+
+app.get("/cart", (req, res) => {
+  res.render("cart", {
+    layout: "cart"
+  });
+});
+
+app.get("/catalogListPage", (req, res) => {
+  res.render("catalog-list-page", {
+    layout: "catalog-list-page"
+  });
+});
+
+app.get("/checkout", (req, res) => {
+  res.render("checkout", {
+    layout: "checkout"
+  });
+});
+
+app.get("/productDetail", (req, res) => {
+  res.render("product-detail", {
+    layout: "product-detail"
+  });
+});
+
+app.get("/register", (req, res) => {
+  res.render("register", {
+    layout: "register"
+  });
 });
 
 app.use(morgan("dev"));

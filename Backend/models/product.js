@@ -28,9 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
   };
-  Product.associate = (models) => {
-    Product.hasMany(models.OrderDetail);
-  };
+  // Product.associate = (models) => {
+  //   Product.hasMany(models.OrderDetail);
+  // };
 
   return Product;
 };

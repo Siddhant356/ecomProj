@@ -9,13 +9,14 @@ var functions = {
   getUserById: function (req, res) {
     db.Users.findAll({
       where: {
-        id: req.params.id,
-      },
+        id: req.params.id
+      }
     }).then((users) => res.send(users));
   },
 
   addNew: async function (req, res) {
-    const { firstName, lastName, username, password, email } = req.body;
+    const { firstName, lastName, gender, city, country, password, email } =
+      req.body;
 
     const alreadyExistUser = await db.Users.findOne({ where: { email } }).catch(
       (err) => {
@@ -30,9 +31,11 @@ var functions = {
     const newUser = new db.Users({
       firstName,
       lastName,
-      username,
+      gender,
+      city,
+      country,
       password,
-      email,
+      email
     });
     await newUser.save().catch((err) => {
       console.log("Error: ", err);
@@ -59,17 +62,17 @@ var functions = {
     );
     res.json({
       message: `Welcom ${userWithEmail.firstName}`,
-      token: jwtToken,
+      token: jwtToken
     });
   },
 
   deleteUser: function (req, res) {
     db.Users.destroy({
       where: {
-        id: req.params.id,
-      },
+        id: req.params.id
+      }
     }).then(() => res.send("success"));
-  },
+  }
 };
 
 module.exports = functions;
